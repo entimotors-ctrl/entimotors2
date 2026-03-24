@@ -1,18 +1,18 @@
 FROM php:8.2-apache
 
-# Instalamos extensiones para tu base de datos
+# Instalamos extensiones de base de datos
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Copiamos todos tus archivos
-COPY . /var/www/html/
+# COPIAMOS EL CONTENIDO DE TU CARPETA A LA RAÍZ DEL SERVIDOR
+# Nota: Esto saca los archivos de la carpeta ENTIMOTORS y los pone donde Apache los vea
+COPY ./ENTIMOTORS/ /var/www/html/
 
-# Damos los permisos necesarios para el panel de administración
+# Permisos de lectura y escritura para el panel
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html
 
-# --- EL TRUCO PARA EL PUERTO EN RENDER ---
-# Forzamos a Apache a usar la variable de entorno PORT que da Render
+# Ajuste de puerto para Render
 RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
-# Comando para iniciar Apache en primer plano
+# Iniciamos Apache
 CMD ["apache2-foreground"]
