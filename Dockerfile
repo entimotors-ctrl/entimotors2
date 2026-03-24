@@ -5,7 +5,7 @@ FROM php:8.2-apache
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Copiamos todos tus archivos al servidor
-COPY . /var/www/html/
+COPY ./public/ /var/www/html/
 
 # Damos permisos para que el panel pueda subir fotos y videos
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
