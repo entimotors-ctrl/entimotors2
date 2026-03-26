@@ -121,6 +121,7 @@
             btn.innerText = 'Guardando...';
 
             try {
+                // AQUÍ ESTÁ LA RUTA EXACTA A LA QUE LLAMAMOS
                 const response = await fetch('/api/rifa/registrar', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
