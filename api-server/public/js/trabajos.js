@@ -67,19 +67,29 @@ async function loadVideos() {
             return;
         }
         empty.classList.add('hidden');
-        grid.innerHTML = data.map(v => `
-            <div class="glass-panel card-hover overflow-hidden">
-                <div style="position:relative; padding-bottom:56.25%; height:0;">
+        
+        // Aquí ocurre la magia para adaptar los tamaños automáticamente
+        grid.innerHTML = data.map(v => {
+            // Verificamos si la URL contiene la palabra "tiktok"
+            const isTikTok = v.url.toLowerCase().includes('tiktok');
+            
+            // Si es TikTok, usamos 177.77% (vertical). Si es YouTube, usamos 56.25% (horizontal).
+            const aspectRatio = isTikTok ? '177.77%' : '56.25%';
+
+            return `
+            <div class="glass-panel card-hover overflow-hidden flex flex-col h-full">
+                <div style="position:relative; padding-bottom:${aspectRatio}; height:0;">
                     <iframe src="${v.url}" title="${v.title}" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen
                         style="position:absolute; top:0; left:0; width:100%; height:100%;"></iframe>
                 </div>
-                <div class="p-4">
+                <div class="p-4 mt-auto">
                     <h3 class="font-teko text-xl uppercase text-white">${v.title}</h3>
                 </div>
             </div>
-        `).join('');
+            `;
+        }).join('');
     } catch {
         grid.innerHTML = '<p class="text-gray-600 col-span-3 text-center py-12 font-teko text-2xl">Error al cargar videos.</p>';
     }
@@ -94,7 +104,3 @@ function openLightbox(src) {
 function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
 }
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
-
-loadProjects();
-loadVideos();
