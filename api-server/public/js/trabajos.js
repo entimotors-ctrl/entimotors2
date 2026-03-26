@@ -91,7 +91,7 @@ async function loadVideos() {
             `;
         }).join('');
     } catch {
-        grid.innerHTML = '<p class="text-gray-600 col-span-3 text-center py-12 font-teko text-2xl">Error al cargar videos.</p>';
+        document.getElementById('videos-grid').innerHTML = '<p class="text-gray-600 col-span-3 text-center py-12 font-teko text-2xl">Error al cargar videos.</p>';
     }
 }
 
@@ -101,6 +101,12 @@ function openLightbox(src) {
     document.getElementById('lightbox-img').src = src;
     lb.style.display = 'flex';
 }
+
 function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
 }
+
+// ---- INICIALIZAR LA PÁGINA ----
+// Estas son las órdenes que le dicen a la página que empiece a buscar la información
+loadProjects();
+loadVideos();
