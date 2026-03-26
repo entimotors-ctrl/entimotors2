@@ -9,7 +9,10 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 const router = Router();
 
 // Lógica para registrar el código
-router.post("/rifa/registrar", async (req, res) => {
+router.post("/registrar", async (req, res) => {
+  // Este log aparecerá en Render para confirmar que superamos el 404
+  console.log("🟢 ¡Petición recibida en la ruta de la rifa!", req.body); 
+
   const { codigo, nombre, telefono } = req.body;
 
   if (!codigo || !nombre || !telefono) {
@@ -33,7 +36,7 @@ router.post("/rifa/registrar", async (req, res) => {
 
     res.status(200).json({ success: true, message: "Código registrado correctamente" });
   } catch (error) {
-    console.error("Error al registrar en la rifa:", error);
+    console.error("🔴 Error al registrar en la rifa:", error);
     res.status(500).json({ error: "Error interno del servidor." });
   }
 });
