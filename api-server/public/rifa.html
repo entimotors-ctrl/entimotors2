@@ -73,7 +73,6 @@
     </div>
 
     <script>
-        // Los 50 códigos válidos de la tabla
         const codigosValidos = [
             'ENTIM-H8A', 'ENTIM-C9B', 'ENTIM-J0C', 'ENTIM-D1D', 'ENTIM-K2E', 
             'ENTIM-E3F', 'ENTIM-L4G', 'ENTIM-F5H', 'ENTIM-M6I', 'ENTIM-G7J', 
@@ -87,7 +86,6 @@
             'ENTIM-Q3T', 'ENTIM-P4U', 'ENTIM-O5V', 'ENTIM-N6W', 'ENTIM-M7X'
         ];
 
-        // Los 13 códigos que ya vendiste (Incluyendo los 3 nuevos asignados)
         const codigosYaUsados = [
             'ENTIM-H8A', 'ENTIM-J0C', 'ENTIM-D1D', 'ENTIM-K2E', 'ENTIM-E3F', 
             'ENTIM-L4G', 'ENTIM-F5H', 'ENTIM-G7J', 'ENTIM-Z4K', 'ENTIM-R2S',
@@ -136,7 +134,6 @@
                     mensaje.classList.add('bg-green-600/20', 'text-green-400', 'border', 'border-green-500/30');
                     mensaje.innerText = '✅ ¡Éxito! Tu código está registrado para el 10 de Mayo.';
                     document.getElementById('form-rifa').reset();
-                    // Agregar el código a la memoria temporal para que no lo puedan volver a usar sin recargar
                     codigosYaUsados.push(codigo); 
                 } else {
                     mensaje.classList.add('bg-red-600/20', 'text-red-400', 'border', 'border-red-500/30');
