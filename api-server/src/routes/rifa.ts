@@ -8,10 +8,10 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 const router = Router();
 
-// Lógica para registrar el código
+// Lógica para registrar el código. 
+// Nota: La ruta aquí es solo "/registrar" porque el prefijo "/api/rifa" se lo daremos en el index.ts
 router.post("/registrar", async (req, res) => {
-  // Este log aparecerá en Render para confirmar que superamos el 404
-  console.log("🟢 ¡Petición recibida en la ruta de la rifa!", req.body); 
+  console.log("🟢 Petición de rifa recibida:", req.body); // Rastreador para tus logs en Render
 
   const { codigo, nombre, telefono } = req.body;
 
@@ -26,8 +26,7 @@ router.post("/registrar", async (req, res) => {
       .insert([{ codigo, nombre, telefono }]);
 
     if (error) {
-      // 23505 = Llave Primaria Duplicada
-      if (error.code === "23505") {
+      if (error.code === "23505") { // Código SQL de duplicado
         res.status(400).json({ error: "Alguien más ya registró este código." });
         return;
       }
